@@ -1,0 +1,87 @@
+https://leetcode.com/problems/two-sum/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+      vector<pair<int,int>>v;
+        int start=0,end=nums.size()-1,p=0,q=0;
+        for(int i=0;i<=end;i++)
+        {
+            v.push_back(make_pair(nums[i],i));
+        }
+        sort(v.begin(),v.end());
+        while(start<end)
+        {
+            if(v[start].first+v[end].first==target)
+            {
+                p=v[start].second;
+                q=v[end].second;
+                return {p,q};
+            }
+            v[start].first+v[end].first>target?end--:start++;
+        }
+        return {p,q};
+    }
+};
+************************************
+2.https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int maxProfit=0;
+        int minprice=INT_MAX;
+        for(int i=0;i<prices.size();i++)
+        {
+            minprice=min(minprice,prices[i]);
+            maxProfit=max(maxProfit,prices[i]-minprice);
+        }
+       return maxProfit; 
+    }
+};
+****************************************
+3.https://leetcode.com/problems/plus-one/
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+      vector<int>res;
+        int d=1;
+        int carry=0;
+        reverse(digits.begin(),digits.end());
+        for(int i=0;i<digits.size();i++)
+        {
+             int sum=digits[i]+d+carry; 
+                d=0;
+            carry=sum>9?1:0;   
+        res.push_back(sum%10);
+            }
+        if(carry)
+        {
+            res.push_back(carry);
+        }
+        reverse(res.begin(),res.end());
+        return res;
+    }
+};
+******************************************
+4.https://leetcode.com/problems/move-zeroes/
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+       int count=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]!=0)
+            {
+                nums[count]=nums[i];
+                count++;
+            }
+        }
+        if(count<nums.size())
+        {
+           while(count<nums.size())
+           {
+               nums[count]=0;
+               count++;
+           }
+        }
+    }
+};
